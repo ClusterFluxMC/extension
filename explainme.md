@@ -36,6 +36,7 @@
 
 ### nickname, nick
 - change nickname
+  - currently disabled due to issues with client/server interaction
 
 ### locateentity
 - locate an entity
