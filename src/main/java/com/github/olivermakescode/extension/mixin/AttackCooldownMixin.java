@@ -6,6 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public class AttackCooldownMixin {
@@ -13,5 +14,12 @@ public class AttackCooldownMixin {
     private void attackCooldownGamerule(CallbackInfo ci) {
         if (!extension.attackCool.getValue() || !extension.itemCooldown.getValue())
             ci.cancel();
+
+    }
+
+    @Inject(method= "getAttackCooldownProgressPerTick()F",at=@At("HEAD"), cancellable = true)
+    public void acg(CallbackInfoReturnable<Float> cir) {
+        if (!extension.attackCool.getValue() || !extension.itemCooldown.getValue())
+            cir.setReturnValue(20f);
     }
 }
