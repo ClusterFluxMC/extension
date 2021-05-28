@@ -15,6 +15,8 @@ public class nicknames {
     public static String[] nickname = {};
 
     public static void addName(PlayerEntity user, String nick) {
+        if (nick.equals("-reset")) nick = user.getEntityName();
+
         int exists = nickExists(user);
         if (exists >= 0) {
             nickname[exists] = nick;

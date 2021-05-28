@@ -36,7 +36,7 @@
 
 ### nickname, nick
 - change nickname
-  - currently disabled due to issues with client/server interaction
+  - use `/nickname -clear` to reset
 
 ### locateentity
 - locate an entity

@@ -30,7 +30,7 @@ public class extension implements ModInitializer {
 		cropWaterRadius = (IntRuleHelper) GameruleHelper.register("farmlandWateringRadius", 4, 1, 32);
 
 		swapRow.register();
-		//nicknames.registerCommand();
+		nicknames.registerCommand();
 		locateEntityCommand.register();
 		musicCommand.register();
 	}
