@@ -1,81 +1,60 @@
 package com.github.olivermakescode.extension;
 
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import org.jetbrains.annotations.Nullable;
+import org.lwjgl.system.CallbackI;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.HashMap;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class nicknames {
-    public static String[] username = {};
-    public static String[] nickname = {};
+    public static HashMap<String,String> nicks = new HashMap<String,String>();
+    public static HashMap<String,Integer> colors = new HashMap<String,Integer>();
 
-    public static void addName(PlayerEntity user, String nick) {
-        if (nick.equals("-reset")) nick = user.getEntityName();
-
-        int exists = nickExists(user);
-        if (exists >= 0) {
-            nickname[exists] = nick;
-            return;
+    public static void addName(Entity user, String nick) {
+        if (nick.equals("-reset") || nick.equals("-clear")) nicks.remove(user.getUuidAsString());
+        else {
+            nicks.put(user.getUuidAsString(), nick);
         }
-        username = Arrays.copyOf(username,username.length+1);
-        username[username.length-1] = user.getUuidAsString();
-
-        nickname = Arrays.copyOf(nickname,nickname.length+1);
-        nickname[nickname.length-1] = nick;
-    }
-
-    private static int nickExists(PlayerEntity user) {
-        for (int i = 0; i < nickname.length; i++) {
-            if (username[i].equals(user.getUuidAsString()))
-                return i;
-        }
-        return -1;
     }
 
     public static void load() throws IOException {
+        nicks.clear();
         String str = loadFile.load("nick.txt");
         if (str != null && !str.equals("") && !str.equals(" ") && !str.equals("\n")) {
             String[] file = str.split("\n");
-            System.out.println(Arrays.toString(file));
-            username = new String[file.length];
-            nickname = new String[file.length];
             if (file.length > 0) {
-                for (int i = 0; i < file.length; i++) {
-                    String[] splitFile = file[i].split(":");
+                for (String s : file) {
+                    String[] splitFile = s.split(":");
                     if (splitFile.length > 1) {
-                        username[i] = splitFile[0];
-                        nickname[i] = splitFile[1];
+                        nicks.put(splitFile[0], splitFile[1]);
+                        if (splitFile.length > 2)
+                            colors.put(splitFile[0],Integer.parseInt(splitFile[2]));
                     }
-                    System.out.println(Arrays.toString(splitFile));
                 }
             }
         }
     }
 
     public static void save() throws IOException {
-        String[] intermediary = new String[username.length];
         String toSave = "";
-        for (int i = 0; i < username.length; i++) {
-            intermediary[i] = username[i] + ":" + nickname[i];
-            toSave += intermediary[i] + "\n";
-        }
+        for (String i: nicks.keySet())
+            toSave += i + ":" + nicks.get(i) + ":" + colors.get(i).toString() + "\n";
         loadFile.save("nick.txt",toSave);
     }
 
-    public static String getName(PlayerEntity user) {
-        for (int i = 0; i < nickname.length; i++) {
-            if (username[i].equals(user.getUuidAsString())) {
-                if (nickname[i] != null)
-                    return nickname[i];
-                else return user.getGameProfile().getName();
-            }
-        }
-        return user.getGameProfile().getName();
+    public static String getName(Entity user) {
+        String uuid = user.getUuidAsString();
+        if (nicks.containsKey(uuid))
+            return nicks.get(uuid);
+        return user.getEntityName();
     }
 
     public static void registerCommand() {
