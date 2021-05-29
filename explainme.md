@@ -20,6 +20,9 @@
 ### attackCooldown
 - whether there's an attack cooldown
 
+### damageImmunity
+- whether there are invincibility frames
+
 ### fallingBlocks
 - whether blocks fall
 
