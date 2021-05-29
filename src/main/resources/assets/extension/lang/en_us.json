@@ -1,5 +1,4 @@
 {
   "category.extension": "Extension client keybinds",
-  "key.extension.hotbar": "Hotbar switcher",
-  "chat.extension.nickname": "[%s]%s"
+  "key.extension.hotbar": "Hotbar switcher"
 }

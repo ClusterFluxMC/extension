@@ -18,6 +18,6 @@ public class NickMessageMixin {
         ServerPlayerEntity self = (ServerPlayerEntity) (Object) this;
         String nickname = nicknames.getName(self);
         if (nickname.equals(self.getName().getString())) return old;
-        return new TranslatableText("chat.extension.nickname", new LiteralText(nickname).setStyle(Style.EMPTY.withColor(0xffffff)), old);
+        return new TranslatableText("chat.type.announcement", new LiteralText(nickname).setStyle(Style.EMPTY.withColor(0xffffff)), old);
     }
 }

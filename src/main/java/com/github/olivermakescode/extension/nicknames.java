@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.LiteralText;
 import org.jetbrains.annotations.Nullable;
 import org.lwjgl.system.CallbackI;
 
@@ -19,7 +20,9 @@ public class nicknames {
     public static HashMap<String,Integer> colors = new HashMap<String,Integer>();
 
     public static void addName(Entity user, String nick) {
-        if (nick.equals("-reset") || nick.equals("-clear")) nicks.remove(user.getUuidAsString());
+        if (nick.equals("-reset") || nick.equals("-clear")) {
+            nicks.remove(user.getUuidAsString());
+        }
         else {
             nicks.put(user.getUuidAsString(), nick);
         }
