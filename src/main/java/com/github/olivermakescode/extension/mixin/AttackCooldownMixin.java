@@ -17,7 +17,7 @@ public class AttackCooldownMixin {
         ServerPlayerEntity self = (ServerPlayerEntity) (Object) this;
 
         if (!extension.attackCool.getValue())
-            self.getAttributes().getCustomInstance(EntityAttributes.GENERIC_ATTACK_SPEED).setBaseValue(20);
+            self.getAttributes().getCustomInstance(EntityAttributes.GENERIC_ATTACK_SPEED).setBaseValue(40);
         else self.getAttributes().getCustomInstance(EntityAttributes.GENERIC_ATTACK_SPEED).setBaseValue(4);
         self.networkHandler.sendPacket(new EntityAttributesS2CPacket(self.getId(),self.getAttributes().getAttributesToSend()));
     }
