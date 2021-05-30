@@ -1,13 +1,8 @@
 package com.github.olivermakescode.extension;
 
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
-import org.jetbrains.annotations.Nullable;
-import org.lwjgl.system.CallbackI;
 
 import java.io.IOException;
 import java.util.HashMap;
