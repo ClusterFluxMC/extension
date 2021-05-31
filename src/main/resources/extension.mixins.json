@@ -10,8 +10,7 @@
     "ItemCooldownMixin",
     "MutualExclusiveMixin",
     "NickMessageMixin",
-    "VillagerTradeMixin",
-    "InvinMixin"
+    "VillagerTradeMixin"
   ],
   "client": [
   ],

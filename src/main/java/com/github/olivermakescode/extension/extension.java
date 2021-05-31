@@ -13,7 +13,6 @@ public class extension implements ModInitializer {
 	public static BoolRuleHelper fallingBlocks;
 	public static BoolRuleHelper entitiesTrampleCrops;
 	public static IntRuleHelper cropWaterRadius;
-	public static BoolRuleHelper invinFrames;
 
 	@Override
 	public void onInitialize() {
@@ -29,7 +28,6 @@ public class extension implements ModInitializer {
 		fallingBlocks = (BoolRuleHelper) GameruleHelper.register("fallingBlocks", true);
 		entitiesTrampleCrops = (BoolRuleHelper) GameruleHelper.register("entitiesTrampleCrops", true);
 		cropWaterRadius = (IntRuleHelper) GameruleHelper.register("farmlandWateringRadius", 4, 1, 32);
-		invinFrames = (BoolRuleHelper) GameruleHelper.register("damageImmunity", true);
 
 		swapRow.register();
 		nicknames.registerCommand();
