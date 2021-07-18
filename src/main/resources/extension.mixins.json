@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_16",
   "mixins": [
     "AttackCooldownMixin",
+    "CreeperExplosionMixin",
     "FallingBlockMixin",
     "FarmMixin",
     "ItemCooldownMixin",
