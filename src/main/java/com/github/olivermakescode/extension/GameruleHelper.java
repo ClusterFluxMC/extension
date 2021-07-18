@@ -15,11 +15,6 @@ public class GameruleHelper {
             server = minecraftServer;
         });
         ServerLifecycleEvents.SERVER_STOPPING.register(minecraftServer -> {
-            try {
-                nicknames.save();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
             server = null;
         });
     }
