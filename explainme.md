@@ -1,3 +1,10 @@
+# Welcome to Extension
+
+## A Vanilla client/server compatible mod in the vein of Essentials
+
+### \+ A [Gamerule Helper API](https://github.com/ClusterFluxMC/extension/blob/main/Gamerule-Helper-API.md)
+
+#
 ## Gamerules:
 ### villagerTradeLock
 - whether villager trades instantly restock
@@ -29,6 +36,15 @@
 ### farmlandWateringRadius
 - the radius of farmland to check for water
 
+### creeperExplosions
+- toggles creeper explosions
+
+### soupAxolotls
+- when enabled, axolotls cycle through the variants when named "soup" or "Soup"
+
+### rightClickHarvest
+- Harvest crops with right click
+
 
 ## Commands:
 ### hotbar, hb
@@ -36,10 +52,12 @@
 
 ### nickname, nick
 - change nickname
-  - use `/nickname -clear` to reset
 
 ### locateentity
 - locate an entity
 
 ### music
 - play a song
+
+### fly
+- allows admins to fly (perm lvl 4)
