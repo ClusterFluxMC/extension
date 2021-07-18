@@ -13,11 +13,6 @@ public class GameruleHelper {
     public static void start() {
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
             server = minecraftServer;
-            try {
-                nicknames.load();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
         });
         ServerLifecycleEvents.SERVER_STOPPING.register(minecraftServer -> {
             try {
