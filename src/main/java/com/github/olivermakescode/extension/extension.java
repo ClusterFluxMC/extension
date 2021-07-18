@@ -33,5 +33,6 @@ public class extension implements ModInitializer {
 		locateEntityCommand.register();
 		musicCommand.register();
 		RightClickHarvest.register();
+		FlyCommand.register();
 	}
 }
