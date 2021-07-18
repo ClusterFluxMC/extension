@@ -22,6 +22,7 @@ public class SoupAxolotlMixin {
     private static TrackedData<Integer> VARIANT;
 
     public int soupCount;
+
     @Inject(at=@At("RETURN"),method= "baseTick()V")
     public void soupInject(CallbackInfo ci) {
         if (!extension.soupAxolotls.getValue()) return;
@@ -37,9 +38,9 @@ public class SoupAxolotlMixin {
             tracker.set(VARIANT,soupCount/5%5);
 
             List<ServerPlayerEntity> players = GameruleHelper.server.getWorld(self.getEntityWorld().getRegistryKey()).getPlayers();
-            for (ServerPlayerEntity player: players) {
+
+            for (ServerPlayerEntity player: players)
                 player.networkHandler.sendPacket(new EntityTrackerUpdateS2CPacket(self.getId(), tracker,true));
-            }
         }
     }
 }
