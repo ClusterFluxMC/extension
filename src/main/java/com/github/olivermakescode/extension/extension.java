@@ -14,6 +14,7 @@ public class extension implements ModInitializer {
 	public static BoolRuleHelper entitiesTrampleCrops;
 	public static BoolRuleHelper creeperExplosions;
 	public static IntRuleHelper cropWaterRadius;
+	public static BoolRuleHelper soupAxolotls;
 
 	@Override
 	public void onInitialize() {
@@ -30,6 +31,7 @@ public class extension implements ModInitializer {
 		entitiesTrampleCrops = (BoolRuleHelper) GameruleHelper.register("entitiesTrampleCrops", true);
 		cropWaterRadius = (IntRuleHelper) GameruleHelper.register("farmlandWateringRadius", 4, 1, 32);
 		creeperExplosions = (BoolRuleHelper) GameruleHelper.register("creeperExplosions", true);
+		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
 
 		swapRow.register();
 		locateEntityCommand.register();
