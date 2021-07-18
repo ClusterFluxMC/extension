@@ -16,7 +16,7 @@ public class CreeperExplosionMixin {
             target="Lnet/minecraft/world/World;createExplosion(Lnet/minecraft/entity/Entity;DDDFLnet/minecraft/world/explosion/Explosion$DestructionType;)Lnet/minecraft/world/explosion/Explosion;"
     ))
     public Explosion redirection(World world, Entity entity, double x, double y, double z, float power, Explosion.DestructionType destructionType) {
-        if (extension.creeperExplosions.getValue()) return world.createExplosion(entity,x,y,z,power, Explosion.DestructionType.NONE);
+        if (!extension.creeperExplosions.getValue()) return world.createExplosion(entity,x,y,z,power, Explosion.DestructionType.NONE);
         return world.createExplosion(entity,x,y,z,power, destructionType);
     }
 }
