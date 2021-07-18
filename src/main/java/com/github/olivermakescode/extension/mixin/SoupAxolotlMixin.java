@@ -36,7 +36,7 @@ public class SoupAxolotlMixin {
             DataTracker tracker = self.getDataTracker();
             tracker.set(VARIANT,soupCount/5%5);
 
-            List<ServerPlayerEntity> players = GameruleHelper.server.getOverworld().getPlayers();
+            List<ServerPlayerEntity> players = GameruleHelper.server.getWorld(self.getEntityWorld().getRegistryKey()).getPlayers();
             for (ServerPlayerEntity player: players) {
                 player.networkHandler.sendPacket(new EntityTrackerUpdateS2CPacket(self.getId(), tracker,true));
             }
