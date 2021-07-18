@@ -32,5 +32,6 @@ public class extension implements ModInitializer {
 		swapRow.register();
 		locateEntityCommand.register();
 		musicCommand.register();
+		RightClickHarvest.register();
 	}
 }
