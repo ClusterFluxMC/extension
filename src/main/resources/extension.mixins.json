@@ -9,7 +9,6 @@
     "FarmMixin",
     "ItemCooldownMixin",
     "MutualExclusiveMixin",
-    "NickMessageMixin",
     "VillagerTradeMixin"
   ],
   "client": [
