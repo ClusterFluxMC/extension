@@ -16,7 +16,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class locateEntityCommand {
     public static void register() {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            dispatcher.register(literal("locateentity").then(argument("selector", EntityArgumentType.entities()).executes(locateEntityCommand::run)));
+            dispatcher.register(literal("locateentity").requires(source -> source.hasPermissionLevel(4)).then(argument("selector", EntityArgumentType.entities()).executes(locateEntityCommand::run)));
         });
     }
 
