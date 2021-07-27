@@ -5,10 +5,13 @@ import net.minecraft.server.MinecraftServer;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Map;
 
 public class GameruleHelper {
     @Nullable
     public static MinecraftServer server;
+
+    public static Map<String,GameRuleInterface> rules;
 
     public static void start() {
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
@@ -20,18 +23,26 @@ public class GameruleHelper {
     }
 
     public static GameRuleInterface register(String name, boolean defaultValue) {
-        return new BoolRuleHelper(name, defaultValue);
+        GameRuleInterface rule = new BoolRuleHelper(name, defaultValue);
+        rules.put(name,rule);
+        return rule;
     }
 
     public static GameRuleInterface register(String name, int defaultValue) {
-        return new IntRuleHelper(name, defaultValue);
+        GameRuleInterface rule = new IntRuleHelper(name, defaultValue);
+        rules.put(name,rule);
+        return rule;
     }
 
     public static GameRuleInterface register(String name, int defaultValue, int min) {
-        return new IntRuleHelper(name, defaultValue, min);
+        GameRuleInterface rule = new IntRuleHelper(name, defaultValue, min);
+        rules.put(name,rule);
+        return rule;
     }
 
     public static GameRuleInterface register(String name, int defaultValue, int min, int max) {
-        return new IntRuleHelper(name, defaultValue, min, max);
+        GameRuleInterface rule = new IntRuleHelper(name, defaultValue, min, max);
+        rules.put(name,rule);
+        return rule;
     }
 }
