@@ -2,27 +2,30 @@ package com.github.olivermakescode.extension.mixin;
 
 import com.github.olivermakescode.extension.NicknameCommand;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.server.network.ServerPlayNetworkHandler;
+import net.minecraft.network.MessageType;
+import net.minecraft.server.PlayerManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(ServerPlayNetworkHandler.class)
+import java.util.UUID;
+
+@Mixin(PlayerManager.class)
 public class NickMessageMixin {
-    @Shadow public ServerPlayerEntity player;
 
-    @ModifyVariable(method= "handleMessage(Lnet/minecraft/server/filter/TextStream$Message;)V",at=@At("STORE"), ordinal = 0)
-    public Text getNickT1(Text old) {
-        return getText(old,this.player);
-    }
-
-    @ModifyVariable(method= "handleMessage(Lnet/minecraft/server/filter/TextStream$Message;)V",at=@At("STORE"), ordinal = 1)
-    public Text getNickT2(Text old) {
-        return getText(old,this.player);
+    @Redirect(
+            method = "broadcast(Lnet/minecraft/text/Text;Ljava/util/function/Function;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/server/network/ServerPlayerEntity;sendMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/MessageType;Ljava/util/UUID;)V"
+            )
+    )
+    public void redirect(ServerPlayerEntity serverPlayerEntity, Text message, MessageType type, UUID sender) {
+        if (type == MessageType.CHAT) message = getText(message,serverPlayerEntity.server.getPlayerManager().getPlayer(sender));
+        serverPlayerEntity.sendMessage(message,type,sender);
     }
 
     private static Text getText(Text old, PlayerEntity player) {

@@ -2,7 +2,6 @@ package com.github.olivermakescode.extension;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.scoreboard.Team;
-import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 
 import java.util.HashMap;
