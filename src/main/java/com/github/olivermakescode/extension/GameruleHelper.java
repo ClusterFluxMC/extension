@@ -4,14 +4,11 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.minecraft.server.MinecraftServer;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class GameruleHelper {
     @Nullable
     public static MinecraftServer server;
-
-    public static Map<String,GameRuleInterface> rules;
 
     public static void start() {
         ServerLifecycleEvents.SERVER_STARTED.register(minecraftServer -> {
@@ -23,26 +20,18 @@ public class GameruleHelper {
     }
 
     public static GameRuleInterface register(String name, boolean defaultValue) {
-        GameRuleInterface rule = new BoolRuleHelper(name, defaultValue);
-        rules.put(name,rule);
-        return rule;
+        return new BoolRuleHelper(name, defaultValue);
     }
 
     public static GameRuleInterface register(String name, int defaultValue) {
-        GameRuleInterface rule = new IntRuleHelper(name, defaultValue);
-        rules.put(name,rule);
-        return rule;
+        return new IntRuleHelper(name, defaultValue);
     }
 
     public static GameRuleInterface register(String name, int defaultValue, int min) {
-        GameRuleInterface rule = new IntRuleHelper(name, defaultValue, min);
-        rules.put(name,rule);
-        return rule;
+        return new IntRuleHelper(name, defaultValue, min);
     }
 
     public static GameRuleInterface register(String name, int defaultValue, int min, int max) {
-        GameRuleInterface rule = new IntRuleHelper(name, defaultValue, min, max);
-        rules.put(name,rule);
-        return rule;
+        return new IntRuleHelper(name, defaultValue, min, max);
     }
 }
