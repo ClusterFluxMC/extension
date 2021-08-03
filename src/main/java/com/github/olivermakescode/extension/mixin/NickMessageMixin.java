@@ -31,8 +31,10 @@ public class NickMessageMixin {
     private static Text getText(Text old, PlayerEntity player) {
         if (NicknameCommand.nicks.getNick(player) == null || old == null)
             return old;
-        if (old instanceof TranslatableText text)
-            return new TranslatableText("chat.type.text", NicknameCommand.nicks.getNickAsDN(player), text.getArgs()[1]);
+        if (old instanceof TranslatableText text) {
+            Text oldName = (Text) text.getArgs()[0];
+            return new TranslatableText("chat.type.text", NicknameCommand.nicks.getNickAsDN(player,oldName.getStyle()), text.getArgs()[1]);
+        }
         return old;
     }
 
