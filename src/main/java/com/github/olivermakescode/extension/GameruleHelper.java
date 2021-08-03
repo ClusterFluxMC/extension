@@ -15,11 +15,13 @@ public class GameruleHelper {
             server = minecraftServer;
             try {
                 NicknameCommand.nicks.readFromNBT();
+                HomeCommand.homes.load();
             } catch (IOException ignored) {}
         });
         ServerLifecycleEvents.SERVER_STOPPING.register(minecraftServer -> {
             try {
                 NicknameCommand.nicks.saveToNBT();
+                HomeCommand.homes.save();
             } catch (IOException ignored) {}
             server = null;
         });
