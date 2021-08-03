@@ -61,3 +61,11 @@
 
 ### fly
 - allows admins to fly (perm lvl 4)
+
+### tpa, tpahere, tpaccept
+- the tpa commands you would see in Essentials
+    - disabled by default, enable the gamerule tpaEnabled to enable
+    
+### home, sethome, delhome
+- the home commands you would see in Essentials
+    - disabled by default, enable the gamerule homeEnabled to enable
