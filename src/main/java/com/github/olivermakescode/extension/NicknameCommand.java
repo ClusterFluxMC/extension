@@ -8,7 +8,6 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
-import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.literal;
@@ -53,6 +52,7 @@ public class NicknameCommand {
         if (ctx.getSource().getEntity() instanceof PlayerEntity player) {
             String name = StringArgumentType.getString(ctx,"nickname");
             nicks.addNick(player,name);
+            ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
             return 1;
         }
         ctx.getSource().sendError(Text.of("Unknown error occurred. Did you execute as an entity?"));
@@ -61,6 +61,7 @@ public class NicknameCommand {
     private static int resetName(CommandContext<ServerCommandSource> ctx) {
         if (ctx.getSource().getEntity() instanceof PlayerEntity player) {
             nicks.removeNick(player);
+            ctx.getSource().sendFeedback(Text.of("Reset nickname"), false);
             return 1;
         }
         ctx.getSource().sendError(Text.of("Unknown error occurred. Did you execute as an entity?"));
@@ -76,11 +77,13 @@ public class NicknameCommand {
         PlayerEntity target =  EntityArgumentType.getPlayer(ctx,"player");
         String name = StringArgumentType.getString(ctx,"nickname");
         nicks.addNick(target,name);
+        ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
         return 1;
     }
     private static int resetNameAdmin(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         PlayerEntity target =  EntityArgumentType.getPlayer(ctx,"player");
         nicks.removeNick(target);
+        ctx.getSource().sendFeedback(Text.of("Reset nickname"), false);
         return 1;
     }
 
