@@ -15,7 +15,7 @@ public class RightClickHarvest {
     public static void register() {
         RCH = (BoolRuleHelper) GameruleHelper.register("rightClickHarvest",false);
         UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            if (player.isSneaking() && !RCH.getValue()) return ActionResult.PASS;
+            if (player.isSneaking() || !RCH.getValue()) return ActionResult.PASS;
             BlockState blockState = world.getBlockState(hitResult.getBlockPos());
             BlockPos pos = hitResult.getBlockPos();
             if (blockState.getBlock() instanceof BeetrootsBlock) {
