@@ -40,5 +40,6 @@ public class extension implements ModInitializer {
 		FlyCommand.register();
 		NicknameCommand.register();
 		HomeCommand.register();
+		TpaCommand.register();
 	}
 }
