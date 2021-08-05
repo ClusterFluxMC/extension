@@ -4,11 +4,14 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import eu.pb4.placeholders.PlaceholderAPI;
+import eu.pb4.placeholders.PlaceholderResult;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 import static net.minecraft.server.command.CommandManager.literal;
 import static net.minecraft.server.command.CommandManager.*;
@@ -30,6 +33,8 @@ public class NicknameCommand {
             dispatcher.register(nick);
             dispatcher.register(nickname);
         });
+
+        registerPhApi();
     }
 
     public static LiteralArgumentBuilder<ServerCommandSource> registerAdmin() {
@@ -38,6 +43,16 @@ public class NicknameCommand {
         LiteralArgumentBuilder<ServerCommandSource> reset = literal("reset").then(argument("player", EntityArgumentType.player()).executes(NicknameCommand::resetNameAdmin));
 
         return literal("admin").requires(source -> source.hasPermissionLevel(4)).then(get).then(set).then(reset);
+    }
+
+    public static void registerPhApi() {
+        PlaceholderAPI.register(new Identifier("ext","nickname"), ctx -> {
+            if (!ctx.hasPlayer())
+                return PlaceholderResult.invalid();
+            if (nicks.getNick(ctx.getPlayer()) == null)
+                return PlaceholderResult.value(ctx.getPlayer().getDisplayName());
+            return PlaceholderResult.value(nicks.getNickAsDN(ctx.getPlayer(),ctx.getPlayer().getDisplayName().getStyle()));
+        });
     }
 
     private static int getName(CommandContext<ServerCommandSource> ctx) {

@@ -39,6 +39,7 @@
     "java": ">=8"
   },
   "suggests": {
-    "inventoryhud": "*"
+    "inventoryhud": "*",
+    "styledchat":  "*"
   }
 }
