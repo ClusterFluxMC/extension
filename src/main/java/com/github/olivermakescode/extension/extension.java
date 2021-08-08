@@ -20,6 +20,7 @@ public class extension implements ModInitializer {
 	public static IntRuleHelper cropWaterRadius;
 	public static BoolRuleHelper soupAxolotls;
 	public static IntRuleHelper infinityArrowCount;
+	public static BoolRuleHelper netherWater;
 
 	@Override
 	public void onInitialize() {
@@ -38,6 +39,7 @@ public class extension implements ModInitializer {
 		creeperExplosions = (BoolRuleHelper) GameruleHelper.register("creeperExplosions", true);
 		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
 		infinityArrowCount = (IntRuleHelper) GameruleHelper.register("infinityArrowCount",1,0,64);
+		netherWater = (BoolRuleHelper) GameruleHelper.register("netherWater", false);
 		/* //Gamerule display for StyledPlayerList
 	"<color:#00ff00>Extension Gamerules:</color>",
     "<color:#88ff88>Villager Trading Lock: <color:#8888ff>%ext:villagertradelock%</color>",

@@ -13,7 +13,8 @@
     "MutualExclusiveMixin",
     "NickMessageMixin",
     "SoupAxolotlMixin",
-    "VillagerTradeMixin"
+    "VillagerTradeMixin",
+    "WaterPlaceMixin"
   ],
   "client": [
   ],
