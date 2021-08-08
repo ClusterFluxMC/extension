@@ -38,6 +38,9 @@ public class extension implements ModInitializer {
 		creeperExplosions = (BoolRuleHelper) GameruleHelper.register("creeperExplosions", true);
 		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
 		infinityArrowCount = (IntRuleHelper) GameruleHelper.register("infinityArrowCount",1,0,64);
+		/*
+		Villager Trading Lock: %ext:villagertradelock%\nNo Mutual Exclusive: %disablemutualexclusiveenchantments%\nItem Cooldown: %ext:itemcooldown%\nEnder Pearl Cooldown: %ext:enderpearlcooldown%\nChorus Fruit Cooldown: %ext:chorusfruitcooldown%\nShield Cooldown: %ext:shieldcooldown%\nAttack Cooldown: %ext:attackcooldown%\nFalling Blocks: %ext:fallingblocks%\nEntities Trample Crops: %ext:entitiesTrampleCrops%\nFarmland Watering Radius: %ext:farmlandwateringradius%\nCreeper Explosions: %ext:creeperexplosions%\nSoup Axolotls: %ext:soupaxolotls%\nInfinity Arrow Count: %ext:infinityarrowcount%
+		*/
 
 		swapRow.register();
 		locateEntityCommand.register();
