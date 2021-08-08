@@ -4,7 +4,11 @@
 
 ### \+ A [Gamerule Helper API](https://github.com/ClusterFluxMC/extension/blob/main/Gamerule-Helper-API.md)
 
-#
+## Placeholder API:
+- Namespace for all Extension placeholders is `ext`
+- Nicknames accessible by the path `nickname` (In place of player name)
+- All Extension gamerules have their value in the same path as their name, but as all lowercase
+
 ## Gamerules:
 ### villagerTradeLock
 - whether villager trades instantly restock
@@ -43,8 +47,10 @@
 - when enabled, axolotls cycle through the variants when named "soup" or "Soup"
 
 ### rightClickHarvest
-- Harvest crops with right click
+- harvest crops with right click
 
+### infinityArrowCount
+- amount of arrows needed for infinity to work
 
 ## Commands:
 ### hotbar, hb

@@ -14,7 +14,7 @@ public class BoolRuleHelper implements GameRuleInterface {
     public BoolRuleHelper(String name, boolean defaultValue) {
         this.value = defaultValue;
         this.rule = GameRuleRegistry.register(name, GameRules.Category.MISC, GameRuleFactory.createBooleanRule(defaultValue));
-        PlaceholderAPI.register(new Identifier("ext",name), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
+        PlaceholderAPI.register(new Identifier("ext",name.toLowerCase()), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
     }
 
     @Override

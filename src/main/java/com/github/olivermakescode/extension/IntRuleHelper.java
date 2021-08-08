@@ -14,19 +14,19 @@ public class IntRuleHelper implements GameRuleInterface {
     public IntRuleHelper(String name, int defaultValue) {
         this.value = defaultValue;
         this.rule = GameRuleRegistry.register(name, GameRules.Category.MISC, GameRuleFactory.createIntRule(defaultValue));
-        PlaceholderAPI.register(new Identifier("ext",name), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
+        PlaceholderAPI.register(new Identifier("ext",name.toLowerCase()), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
     }
 
     public IntRuleHelper(String name, int defaultValue, int min) {
         this.value = defaultValue;
         this.rule = GameRuleRegistry.register(name, GameRules.Category.MISC, GameRuleFactory.createIntRule(defaultValue, min));
-        PlaceholderAPI.register(new Identifier("ext",name), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
+        PlaceholderAPI.register(new Identifier("ext",name.toLowerCase()), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
     }
 
     public IntRuleHelper(String name, int defaultValue, int min, int max) {
         this.value = defaultValue;
         this.rule = GameRuleRegistry.register(name, GameRules.Category.MISC, GameRuleFactory.createIntRule(defaultValue, min, max));
-        PlaceholderAPI.register(new Identifier("ext",name), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
+        PlaceholderAPI.register(new Identifier("ext",name.toLowerCase()), ctx -> PlaceholderResult.value(String.valueOf(this.getValue())));
     }
 
     @Override
