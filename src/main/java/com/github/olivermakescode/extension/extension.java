@@ -54,7 +54,7 @@ public class extension implements ModInitializer {
 	"Soup Axolotls: <color:#8888ff>%ext:soupaxolotls%</color>",
 	"Infinity Arrow Count: <color:#ff6666>%ext:infinityarrowcount%</color>",
 	"TPA: <color:#8888ff>%ext:tpaenabled%</color>",
-	"Homes: <color:#8888ff>%ext:homesenabled%</color></color>",
+	"Homes: <color:#8888ff>%ext:homesenabled%</color></color>"
 		*/
 
 		swapRow.register();
