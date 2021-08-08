@@ -55,6 +55,7 @@ public class extension implements ModInitializer {
 	"Creeper Explosions: <color:#8888ff>%ext:creeperexplosions%</color>",
 	"Soup Axolotls: <color:#8888ff>%ext:soupaxolotls%</color>",
 	"Infinity Arrow Count: <color:#ff6666>%ext:infinityarrowcount%</color>",
+	"Water Placable In Nether: <color:#8888ff>%ext:netherwater%</color></color>",
 	"TPA: <color:#8888ff>%ext:tpaenabled%</color>",
 	"Homes: <color:#8888ff>%ext:homesenabled%</color></color>"
 		*/
