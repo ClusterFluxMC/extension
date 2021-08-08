@@ -52,6 +52,9 @@
 ### infinityArrowCount
 - amount of arrows needed for infinity to work
 
+### netherWater
+- allows water to be placed in nether
+
 ## Commands:
 ### hotbar, hb
 - change hotbar to selected inventory row 
