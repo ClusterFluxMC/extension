@@ -38,8 +38,23 @@ public class extension implements ModInitializer {
 		creeperExplosions = (BoolRuleHelper) GameruleHelper.register("creeperExplosions", true);
 		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
 		infinityArrowCount = (IntRuleHelper) GameruleHelper.register("infinityArrowCount",1,0,64);
-		/*
-		Villager Trading Lock: %ext:villagertradelock%\nNo Mutual Exclusive: %disablemutualexclusiveenchantments%\nItem Cooldown: %ext:itemcooldown%\nEnder Pearl Cooldown: %ext:enderpearlcooldown%\nChorus Fruit Cooldown: %ext:chorusfruitcooldown%\nShield Cooldown: %ext:shieldcooldown%\nAttack Cooldown: %ext:attackcooldown%\nFalling Blocks: %ext:fallingblocks%\nEntities Trample Crops: %ext:entitiesTrampleCrops%\nFarmland Watering Radius: %ext:farmlandwateringradius%\nCreeper Explosions: %ext:creeperexplosions%\nSoup Axolotls: %ext:soupaxolotls%\nInfinity Arrow Count: %ext:infinityarrowcount%
+		/* //Gamerule display for StyledPlayerList
+	"<color:#00ff00>Extension Gamerules:</color>",
+    "<color:#88ff88>Villager Trading Lock: <color:#8888ff>%ext:villagertradelock%</color>",
+	"No Mutual Exclusive: <color:#8888ff>%ext:disablemutualexclusiveenchantments%</color>",
+	"Item Cooldown: <color:#8888ff>%ext:itemcooldown%</color>",
+	"Ender Pearl Cooldown: <color:#8888ff>%ext:enderpearlcooldown%</color>",
+	"Chorus Fruit Cooldown: <color:#8888ff>%ext:chorusfruitcooldown%</color>",
+	"Shield Cooldown: <color:#8888ff>%ext:shieldcooldown%</color>",
+	"Attack Cooldown: <color:#8888ff>%ext:attackcooldown%</color>",
+	"Falling Blocks: <color:#8888ff>%ext:fallingblocks%</color>",
+	"Entities Trample Crops: <color:#8888ff>%ext:entitiestramplecrops%</color>",
+	"Farmland Watering Radius: <color:#ff6666>%ext:farmlandwateringradius%</color>",
+	"Creeper Explosions: <color:#8888ff>%ext:creeperexplosions%</color>",
+	"Soup Axolotls: <color:#8888ff>%ext:soupaxolotls%</color>",
+	"Infinity Arrow Count: <color:#ff6666>%ext:infinityarrowcount%</color>",
+	"TPA: <color:#8888ff>%ext:tpaenabled%</color>",
+	"Homes: <color:#8888ff>%ext:homesenabled%</color></color>",
 		*/
 
 		swapRow.register();
