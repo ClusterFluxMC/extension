@@ -31,6 +31,7 @@ dependencies {
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
 	// You may need to force-disable transitiveness on them.
 	modImplementation include("eu.pb4:placeholder-api:1.1.0+1.17.1")
+	modImplementation "eu.pb4:sidebar-api:0.1.0-rc.3+1.17.1"
 }
 
 processResources {

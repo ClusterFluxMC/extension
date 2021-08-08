@@ -6,6 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import eu.pb4.placeholders.PlaceholderAPI;
 import eu.pb4.placeholders.PlaceholderResult;
+import eu.pb4.sidebars.api.Sidebar;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,9 +19,12 @@ import static net.minecraft.server.command.CommandManager.*;
 
 public class NicknameCommand {
     public static NickDataStorage nicks;
+    public static Sidebar sidebar;
+    public static boolean sidebarEnabled = false;
 
     public static void register() {
         nicks = new NickDataStorage();
+        sidebar = new Sidebar(Sidebar.Priority.OVERRIDE);
 
         LiteralArgumentBuilder<ServerCommandSource> get = literal("get").executes(NicknameCommand::getName);
         LiteralArgumentBuilder<ServerCommandSource> set = literal("set").then(argument("nickname",StringArgumentType.string()).executes(NicknameCommand::setName));
@@ -32,6 +36,7 @@ public class NicknameCommand {
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
             dispatcher.register(nick);
             dispatcher.register(nickname);
+            //dispatcher.register(literal("displayNicks").requires(source -> source.hasPermissionLevel(4)).executes(NicknameCommand::displayNicks));
         });
 
         registerPhApi();
@@ -55,6 +60,14 @@ public class NicknameCommand {
         });
     }
 
+    public static int displayNicks(CommandContext<ServerCommandSource> ctx) {
+        nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
+        sidebarEnabled = !sidebarEnabled;
+        if (sidebarEnabled) sidebar.show();
+        else sidebar.hide();
+        return 1;
+    }
+
     private static int getName(CommandContext<ServerCommandSource> ctx) {
         if (ctx.getSource().getEntity() instanceof PlayerEntity player) {
             ctx.getSource().sendFeedback(Text.of("Player has nickname "+nicks.getNick(player)), false);
@@ -68,6 +81,7 @@ public class NicknameCommand {
             String name = StringArgumentType.getString(ctx,"nickname");
             nicks.addNick(player,name);
             ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
+            nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
             return 1;
         }
         ctx.getSource().sendError(Text.of("Unknown error occurred. Did you execute as an entity?"));
@@ -93,6 +107,7 @@ public class NicknameCommand {
         String name = StringArgumentType.getString(ctx,"nickname");
         nicks.addNick(target,name);
         ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
+        nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
         return 1;
     }
     private static int resetNameAdmin(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {

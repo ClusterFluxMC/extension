@@ -1,11 +1,11 @@
 package com.github.olivermakescode.extension;
 
+import eu.pb4.sidebars.api.Sidebar;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.scoreboard.Team;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.WorldSavePath;
@@ -13,8 +13,7 @@ import net.minecraft.util.WorldSavePath;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class NickDataStorage {
     public HashMap<String,String> nicks;
@@ -69,6 +68,21 @@ public class NickDataStorage {
             nbt = NbtIo.readCompressed(nbtFile);
         for (String key : nbt.getKeys())
             nicks.put(key,nbt.getString(key));
+    }
+
+    public Sidebar getPlayerList(List<ServerPlayerEntity> players, Sidebar old) {
+        old.clearLines();
+        String[] names = new String[players.size()];
+        for (int i = 0; i < players.size(); i++) {
+            PlayerEntity player = players.get(i);
+            String name = player.getName().toString() + " : " + getNick(player);
+            if (name.equals(player.getName().toString() + " : ")) name = player.getName().toString();
+            names[i] = name;
+        }
+        for (int i = 0; i < names.length; i++) {
+            old.setLine(i, Text.of(names[i]));
+        }
+        return old;
     }
 
     public void reset() {
