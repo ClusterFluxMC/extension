@@ -1,6 +1,10 @@
 package com.github.olivermakescode.extension;
 
+import eu.pb4.placeholders.PlaceholderAPI;
+import eu.pb4.placeholders.PlaceholderResult;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public class extension implements ModInitializer {
 	public static BoolRuleHelper villagerTradeLock;
@@ -15,6 +19,7 @@ public class extension implements ModInitializer {
 	public static BoolRuleHelper creeperExplosions;
 	public static IntRuleHelper cropWaterRadius;
 	public static BoolRuleHelper soupAxolotls;
+	public static IntRuleHelper infinityArrowCount;
 
 	@Override
 	public void onInitialize() {
@@ -32,6 +37,7 @@ public class extension implements ModInitializer {
 		cropWaterRadius = (IntRuleHelper) GameruleHelper.register("farmlandWateringRadius", 4, 1, 32);
 		creeperExplosions = (BoolRuleHelper) GameruleHelper.register("creeperExplosions", true);
 		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
+		infinityArrowCount = (IntRuleHelper) GameruleHelper.register("infinityArrowCount",1,0,64);
 
 		swapRow.register();
 		locateEntityCommand.register();
