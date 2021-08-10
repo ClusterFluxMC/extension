@@ -21,6 +21,9 @@ public class extension implements ModInitializer {
 	public static BoolRuleHelper soupAxolotls;
 	public static IntRuleHelper infinityArrowCount;
 	public static BoolRuleHelper netherWater;
+	public static BoolRuleHelper alphaSponges;
+	public static BoolRuleHelper alphaFluid;
+	public static BoolRuleHelper alphaTnt;
 
 	@Override
 	public void onInitialize() {
@@ -40,25 +43,9 @@ public class extension implements ModInitializer {
 		soupAxolotls = (BoolRuleHelper) GameruleHelper.register("soupAxolotls", true);
 		infinityArrowCount = (IntRuleHelper) GameruleHelper.register("infinityArrowCount",1,0,64);
 		netherWater = (BoolRuleHelper) GameruleHelper.register("netherWater", false);
-		/* //Gamerule display for StyledPlayerList
-	"<color:#00ff00>Extension Gamerules:</color>",
-    "<color:#88ff88>Villager Trading Lock: <color:#8888ff>%ext:villagertradelock%</color>",
-	"No Mutual Exclusive: <color:#8888ff>%ext:disablemutualexclusiveenchantments%</color>",
-	"Item Cooldown: <color:#8888ff>%ext:itemcooldown%</color>",
-	"Ender Pearl Cooldown: <color:#8888ff>%ext:enderpearlcooldown%</color>",
-	"Chorus Fruit Cooldown: <color:#8888ff>%ext:chorusfruitcooldown%</color>",
-	"Shield Cooldown: <color:#8888ff>%ext:shieldcooldown%</color>",
-	"Attack Cooldown: <color:#8888ff>%ext:attackcooldown%</color>",
-	"Falling Blocks: <color:#8888ff>%ext:fallingblocks%</color>",
-	"Entities Trample Crops: <color:#8888ff>%ext:entitiestramplecrops%</color>",
-	"Farmland Watering Radius: <color:#ff6666>%ext:farmlandwateringradius%</color>",
-	"Creeper Explosions: <color:#8888ff>%ext:creeperexplosions%</color>",
-	"Soup Axolotls: <color:#8888ff>%ext:soupaxolotls%</color>",
-	"Infinity Arrow Count: <color:#ff6666>%ext:infinityarrowcount%</color>",
-	"Water Placable In Nether: <color:#8888ff>%ext:netherwater%</color></color>",
-	"TPA: <color:#8888ff>%ext:tpaenabled%</color>",
-	"Homes: <color:#8888ff>%ext:homesenabled%</color></color>"
-		*/
+		alphaSponges = (BoolRuleHelper) GameruleHelper.register("classicSponges", false);
+		alphaFluid = (BoolRuleHelper) GameruleHelper.register("classicFluid", false);
+		alphaTnt = (BoolRuleHelper) GameruleHelper.register("alphaTnt", false);
 
 		swapRow.register();
 		locateEntityCommand.register();
