@@ -8,6 +8,9 @@ import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.World;
 
 import static net.minecraft.server.command.CommandManager.literal;
 import static net.minecraft.server.command.CommandManager.*;
@@ -53,13 +56,13 @@ public class HomeCommand {
     public static int tpHome(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         String home = StringArgumentType.getString(ctx,"home");
         PlayerEntity player = ctx.getSource().getPlayer();
-        float[] pos = homes.getHome(player,home);
+        HomeStorage.Location location = homes.getHome(player,home);
+        if (location != null) {
+            BlockPos pos = location.pos;
+            RegistryKey<World> key = location.world;
 
-        if (pos != null) {
-            float x = pos[0];
-            float y = pos[1];
-            float z = pos[2];
-            player.requestTeleport(x,y,z);
+            player.moveToWorld(GameruleHelper.server.getWorld(key)).requestTeleport(pos.getX(),pos.getY(),pos.getZ());
+
             ctx.getSource().sendFeedback(Text.of("Teleported to home \""+home+"\""), false);
 
             return 1;
@@ -72,12 +75,10 @@ public class HomeCommand {
     public static int setHome(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         String home = StringArgumentType.getString(ctx,"home");
         PlayerEntity player = ctx.getSource().getPlayer();
-        float x = (float) player.getX();
-        float y = (float) player.getY();
-        float z = (float) player.getZ();
+        BlockPos pos = player.getBlockPos();
 
-        homes.addHome(player,home,x,y,z);
-        ctx.getSource().sendFeedback(Text.of("Home \""+home+"\" created at position "+(int)x+", "+(int)y+", "+(int)z), false);
+        homes.addHome(player,home,pos);
+        ctx.getSource().sendFeedback(Text.of("Home \""+home+"\" created at position "+pos.getX()+", "+pos.getY()+", "+pos.getZ()), false);
         return 1;
     }
 
