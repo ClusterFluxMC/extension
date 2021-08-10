@@ -1,10 +1,6 @@
 package com.github.olivermakescode.extension;
 
-import eu.pb4.placeholders.PlaceholderAPI;
-import eu.pb4.placeholders.PlaceholderResult;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 
 public class extension implements ModInitializer {
 	public static BoolRuleHelper villagerTradeLock;
