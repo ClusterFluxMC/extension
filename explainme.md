@@ -55,6 +55,15 @@
 ### netherWater
 - allows water to be placed in nether
 
+### alphaTnt
+- Punch a Tnt to light it, punch it again to break it
+
+### classicFluid
+- Fluid is all source blocks
+
+### classicSponges
+- Sponges don't let water within 2 blocks
+
 ## Commands:
 ### hotbar, hb
 - change hotbar to selected inventory row 
