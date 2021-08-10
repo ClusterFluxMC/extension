@@ -43,13 +43,13 @@ public class extension implements ModInitializer {
 		alphaFluid = (BoolRuleHelper) GameruleHelper.register("classicFluid", false);
 		alphaTnt = (BoolRuleHelper) GameruleHelper.register("alphaTnt", false);
 
-		swapRow.register();
 		locateEntityCommand.register();
-		musicCommand.register();
 		RightClickHarvest.register();
-		FlyCommand.register();
 		NicknameCommand.register();
+		musicCommand.register();
 		HomeCommand.register();
+		FlyCommand.register();
 		TpaCommand.register();
+		swapRow.register();
 	}
 }
