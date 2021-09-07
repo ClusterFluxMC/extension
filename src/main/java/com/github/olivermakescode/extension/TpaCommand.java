@@ -28,6 +28,8 @@ public class TpaCommand {
         enabled = (BoolRuleHelper) GameruleHelper.register("tpaEnabled", false);
 
         ServerTickEvents.START_SERVER_TICK.register(minecraftServer -> {
+            if (!enabled.getValue()) return;
+
             for (Map.Entry<PlayerEntity, Integer> req : tpaReqs.entrySet()) {
                 req.setValue(req.getValue()+1);
                 if (req.getValue() == 600) {

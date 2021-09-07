@@ -31,7 +31,7 @@ public class SoupAxolotlMixin {
 
         Text name = self.getCustomName();
 
-        if (self.hasCustomName() && (name == Text.of("soup") || name == Text.of("Soup"))) {
+        if (self.hasCustomName() && (name.getString().equalsIgnoreCase("soup"))) {
             soupCount++;
 
             DataTracker tracker = self.getDataTracker();

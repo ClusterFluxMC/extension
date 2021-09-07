@@ -20,7 +20,8 @@
     "SoupAxolotlMixin",
     "Spongebob",
     "VillagerTradeMixin",
-    "WaterPlaceMixin"
+    "WaterPlaceMixin",
+    "WololoMixin"
   ],
   "client": [
   ],

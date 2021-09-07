@@ -20,6 +20,7 @@ public class extension implements ModInitializer {
 	public static BoolRuleHelper alphaSponges;
 	public static BoolRuleHelper alphaFluid;
 	public static BoolRuleHelper alphaTnt;
+	public static BoolRuleHelper wololo;
 
 	@Override
 	public void onInitialize() {
@@ -42,6 +43,7 @@ public class extension implements ModInitializer {
 		alphaSponges = (BoolRuleHelper) GameruleHelper.register("classicSponges", false);
 		alphaFluid = (BoolRuleHelper) GameruleHelper.register("classicFluid", false);
 		alphaTnt = (BoolRuleHelper) GameruleHelper.register("alphaTnt", false);
+		wololo = (BoolRuleHelper) GameruleHelper.register("wololo", true);
 
 		locateEntityCommand.register();
 		RightClickHarvest.register();
