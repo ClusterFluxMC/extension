@@ -3,6 +3,7 @@ package com.github.olivermakescode.extension;
 import com.mojang.brigadier.Message;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
@@ -20,8 +21,9 @@ import static net.minecraft.server.command.CommandManager.literal;
 
 public class LoreCommand {
     public static void register() {
+        LiteralArgumentBuilder<ServerCommandSource> setLore = literal("set").then(argument("Text", MessageArgumentType.message()).executes(LoreCommand::executeSet));
         CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            dispatcher.register(literal("lore").then(literal("set").then(argument("Text", MessageArgumentType.message()).executes(LoreCommand::executeSet))));
+            dispatcher.register(literal("lore").then(setLore));
         });
     }
 
