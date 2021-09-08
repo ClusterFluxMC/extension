@@ -50,6 +50,7 @@ public class extension implements ModInitializer {
 		NicknameCommand.register();
 		musicCommand.register();
 		HomeCommand.register();
+		LoreCommand.register();
 		FlyCommand.register();
 		TpaCommand.register();
 		swapRow.register();

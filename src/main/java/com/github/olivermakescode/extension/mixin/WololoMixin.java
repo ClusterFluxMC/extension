@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(EvokerEntity.class)
 public class WololoMixin {
     @Inject(at=@At("HEAD"),cancellable=true,method="setWololoTarget(Lnet/minecraft/entity/passive/SheepEntity;)V")
-    private static void cancelWololo(SheepEntity sheep, CallbackInfo ci) {
+    private void cancelWololo(SheepEntity sheep, CallbackInfo ci) {
         if (!extension.wololo.getValue()) ci.cancel();
     }
 }

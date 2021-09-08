@@ -9,6 +9,7 @@ import eu.pb4.placeholders.PlaceholderResult;
 import eu.pb4.sidebars.api.Sidebar;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.command.argument.EntityArgumentType;
+import net.minecraft.command.argument.MessageArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
@@ -27,7 +28,7 @@ public class NicknameCommand {
         sidebar = new Sidebar(Sidebar.Priority.OVERRIDE);
 
         LiteralArgumentBuilder<ServerCommandSource> get = literal("get").executes(NicknameCommand::getName);
-        LiteralArgumentBuilder<ServerCommandSource> set = literal("set").then(argument("nickname",StringArgumentType.string()).executes(NicknameCommand::setName));
+        LiteralArgumentBuilder<ServerCommandSource> set = literal("set").then(argument("nickname", MessageArgumentType.message()).executes(NicknameCommand::setName));
         LiteralArgumentBuilder<ServerCommandSource> reset = literal("reset").executes(NicknameCommand::resetName);
 
         LiteralArgumentBuilder<ServerCommandSource> nick = literal("nick").then(get).then(set).then(reset).then(registerAdmin());
@@ -44,7 +45,7 @@ public class NicknameCommand {
 
     public static LiteralArgumentBuilder<ServerCommandSource> registerAdmin() {
         LiteralArgumentBuilder<ServerCommandSource> get = literal("get").then(argument("player", EntityArgumentType.player()).executes(NicknameCommand::getNameAdmin));
-        LiteralArgumentBuilder<ServerCommandSource> set = literal("set").then(argument("player", EntityArgumentType.player()).then(argument("nickname",StringArgumentType.string()).executes(NicknameCommand::setNameAdmin)));
+        LiteralArgumentBuilder<ServerCommandSource> set = literal("set").then(argument("player", EntityArgumentType.player()).then(argument("nickname",MessageArgumentType.message()).executes(NicknameCommand::setNameAdmin)));
         LiteralArgumentBuilder<ServerCommandSource> reset = literal("reset").then(argument("player", EntityArgumentType.player()).executes(NicknameCommand::resetNameAdmin));
 
         return literal("admin").requires(source -> source.hasPermissionLevel(4)).then(get).then(set).then(reset);
@@ -76,9 +77,9 @@ public class NicknameCommand {
         ctx.getSource().sendError(Text.of("Unknown error occurred. Did you execute as an entity?"));
         return 1;
     }
-    private static int setName(CommandContext<ServerCommandSource> ctx) {
+    private static int setName(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         if (ctx.getSource().getEntity() instanceof PlayerEntity player) {
-            String name = StringArgumentType.getString(ctx,"nickname");
+            String name = MessageArgumentType.getMessage(ctx,"nickname").asString();
             nicks.addNick(player,name);
             ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
             nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
@@ -104,7 +105,7 @@ public class NicknameCommand {
     }
     private static int setNameAdmin(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         PlayerEntity target =  EntityArgumentType.getPlayer(ctx,"player");
-        String name = StringArgumentType.getString(ctx,"nickname");
+        String name = MessageArgumentType.getMessage(ctx,"nickname").asString();
         nicks.addNick(target,name);
         ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
         nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
