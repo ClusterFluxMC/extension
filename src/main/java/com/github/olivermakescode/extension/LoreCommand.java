@@ -41,6 +41,7 @@ public class LoreCommand {
         display.put("Lore",lore);
         tag.put("display",display);
         item.setTag(tag);
+        ctx.getSource().getPlayer().sendMessage(FormattedStringParser.parse(loreLines)[0],false);
         return 0;
     }
 }
