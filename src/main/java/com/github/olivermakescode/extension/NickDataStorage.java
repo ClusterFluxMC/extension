@@ -19,15 +19,17 @@ public class NickDataStorage {
     public HashMap<String,String> nicks;
 
     public NickDataStorage() {
-        nicks = new HashMap<String,String>();
+        nicks = new HashMap<>();
     }
 
     public void addNick(PlayerEntity player, String name) {
+        Text text = FormattedStringParser.parse(new String[]{"&4~&r"+name})[0];
+        String string = Text.Serializer.toJson(text);
         if (nicks.containsKey(player.getUuidAsString())) {
-            nicks.replace(player.getUuidAsString(),name);
+            nicks.replace(player.getUuidAsString(),string);
             return;
         }
-        nicks.put(player.getUuidAsString(),name);
+        nicks.put(player.getUuidAsString(),string);
     }
 
     public void removeNick(PlayerEntity player) {
@@ -39,7 +41,11 @@ public class NickDataStorage {
     }
 
     public Text getNickAsDN(PlayerEntity player, Style style) {
-        return Team.decorateName(player.getScoreboardTeam(), Text.of(getNick(player))).setStyle(style);
+        return Team.decorateName(player.getScoreboardTeam(), getNickText(player)).setStyle(style);
+    }
+
+    public Text getNickText(PlayerEntity player) {
+        return Text.Serializer.fromJson(getNick(player));
     }
 
     public void saveToNBT() throws IOException {
@@ -52,7 +58,7 @@ public class NickDataStorage {
         }
 
         Path savePath = GameruleHelper.server.getSavePath(WorldSavePath.ROOT);
-        File nbtFile = new File(savePath.toAbsolutePath().toString(), "nick.nbt");
+        File nbtFile = new File(savePath.toAbsolutePath().toString(), "nick_v2.nbt");
         NbtIo.writeCompressed(nbt, nbtFile);
 
         reset();
@@ -60,7 +66,7 @@ public class NickDataStorage {
 
     public void readFromNBT() throws IOException {
         Path savePath = GameruleHelper.server.getSavePath(WorldSavePath.ROOT);
-        File nbtFile = new File(savePath.toAbsolutePath().toString(), "nick.nbt");
+        File nbtFile = new File(savePath.toAbsolutePath().toString(), "nick_v2.nbt");
 
         NbtCompound nbt = new NbtCompound();
 

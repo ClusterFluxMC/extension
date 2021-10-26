@@ -81,8 +81,7 @@ public class NicknameCommand {
         if (ctx.getSource().getEntity() instanceof PlayerEntity player) {
             String name = MessageArgumentType.getMessage(ctx,"nickname").asString();
             nicks.addNick(player,name);
-            ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
-            nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
+            ctx.getSource().sendFeedback(Text.of("Changed nickname to ").copy().append(nicks.getNickText(player)), false);
             return 1;
         }
         ctx.getSource().sendError(Text.of("Unknown error occurred. Did you execute as an entity?"));
@@ -107,7 +106,7 @@ public class NicknameCommand {
         PlayerEntity target =  EntityArgumentType.getPlayer(ctx,"player");
         String name = MessageArgumentType.getMessage(ctx,"nickname").asString();
         nicks.addNick(target,name);
-        ctx.getSource().sendFeedback(Text.of("Changed nickname to "+name), false);
+        ctx.getSource().sendFeedback(Text.of("Changed nickname to ").copy().append(nicks.getNickText(target)), false);
         nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
         return 1;
     }

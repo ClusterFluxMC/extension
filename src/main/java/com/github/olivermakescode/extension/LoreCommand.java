@@ -1,8 +1,5 @@
 package com.github.olivermakescode.extension;
 
-import com.mojang.brigadier.Message;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -11,10 +8,10 @@ import net.minecraft.command.argument.MessageArgumentType;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.text.Text;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -32,16 +29,19 @@ public class LoreCommand {
         ItemStack item = player.getMainHandStack();
         NbtCompound tag = item.getOrCreateTag();
         NbtCompound display = new NbtCompound();
-        NbtList lore = new NbtList();
         if (tag.contains("display"))
             display = tag.getCompound("display");
         String[] loreLines = MessageArgumentType.getMessage(ctx, "Text").getString().split("\\\\n");
-        for (String s : loreLines)
-            lore.add(NbtString.of("[{\"text\":\""+s+"\"}]"));
+        NbtList lore = FormattedStringParser.parseNbt(loreLines);
         display.put("Lore",lore);
         tag.put("display",display);
         item.setTag(tag);
-        ctx.getSource().getPlayer().sendMessage(FormattedStringParser.parse(loreLines)[0],false);
+        Text[] texts = FormattedStringParser.parse(loreLines);
+        for (int i = 0; i < texts.length; i++) {
+            if (i == 0)
+                ctx.getSource().getPlayer().sendMessage(Text.of("Item's lore changed to: ").copy().append(texts[0]), false);
+            else ctx.getSource().getPlayer().sendMessage(texts[i], false);
+        }
         return 0;
     }
 }
