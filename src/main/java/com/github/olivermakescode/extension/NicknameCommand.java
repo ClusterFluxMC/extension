@@ -62,7 +62,7 @@ public class NicknameCommand {
     }
 
     public static int displayNicks(CommandContext<ServerCommandSource> ctx) {
-        nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
+        nicks.getPlayerList(ctx.getSource().getServer().getPlayerManager().getPlayerList(),sidebar);
         sidebarEnabled = !sidebarEnabled;
         if (sidebarEnabled) sidebar.show();
         else sidebar.hide();
@@ -107,7 +107,7 @@ public class NicknameCommand {
         String name = MessageArgumentType.getMessage(ctx,"nickname").asString();
         nicks.addNick(target,name);
         ctx.getSource().sendFeedback(Text.of("Changed nickname to ").copy().append(nicks.getNickText(target)), false);
-        nicks.getPlayerList(ctx.getSource().getMinecraftServer().getPlayerManager().getPlayerList(),sidebar);
+        nicks.getPlayerList(ctx.getSource().getServer().getPlayerManager().getPlayerList(),sidebar);
         return 1;
     }
     private static int resetNameAdmin(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {

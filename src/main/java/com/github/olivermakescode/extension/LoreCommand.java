@@ -27,7 +27,7 @@ public class LoreCommand {
     private static int executeSet(CommandContext<ServerCommandSource> ctx) throws CommandSyntaxException {
         PlayerEntity player = ctx.getSource().getPlayer();
         ItemStack item = player.getMainHandStack();
-        NbtCompound tag = item.getOrCreateTag();
+        NbtCompound tag = item.getOrCreateNbt();
         NbtCompound display = new NbtCompound();
         if (tag.contains("display"))
             display = tag.getCompound("display");
@@ -35,7 +35,7 @@ public class LoreCommand {
         NbtList lore = FormattedStringParser.parseNbt(loreLines);
         display.put("Lore",lore);
         tag.put("display",display);
-        item.setTag(tag);
+        item.setNbt(tag);
         Text[] texts = FormattedStringParser.parse(loreLines);
         for (int i = 0; i < texts.length; i++) {
             if (i == 0)
