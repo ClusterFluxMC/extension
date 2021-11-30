@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Extension",
-  "description": "A Quark-inspired Minecraft mod targeting Fabric and Quilt",
+  "description": "A Essentials-inspired Minecraft mod targeting Fabric and Quilt",
   "authors": [
     "Oliver-makes-code",
     "Fusion-Flux",
@@ -33,10 +33,10 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.12.6",
     "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=8"
+    "minecraft": "1.18.x",
+    "java": ">=17"
   },
   "suggests": {
     "inventoryhud": "*",
