@@ -8,7 +8,6 @@
   "authors": [
     "Oliver-makes-code",
     "Fusion-Flux",
-    "gappysona",
     "chexo3 (contributor)"
   ],
   "contact": {
@@ -33,9 +32,9 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.12.6",
+    "fabricloader": "*",
     "fabric": "*",
-    "minecraft": "1.18.x",
+    "minecraft": "1.18.2",
     "java": ">=17"
   },
   "suggests": {
